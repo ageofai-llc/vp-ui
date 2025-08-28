@@ -35,7 +35,7 @@ interface AgentConnectState {
 
 export function useAgeOfAiConnect(options: UseAgentConnectOptions = {}) {
   const {
-    serverUrl = "http://localhost:8099",
+    serverUrl = "http://localhost:8099"
     systemPrompt,
     enableCam = false,
     enableMic = false,
