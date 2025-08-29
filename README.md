@@ -1,6 +1,6 @@
 # Voice UI Component
 
-A beautiful, reusable voice interface component with real-time audio visualization, built for React and powered by Pipecat AI.
+A beautiful, reusable voice interface component with real-time audio visualization, built for React and powered by AgeOfAI.
 
 ## Features
 
@@ -8,7 +8,6 @@ A beautiful, reusable voice interface component with real-time audio visualizati
 - 🌊 Dynamic audio visualization
 - 📝 Live transcript display
 - 🎨 Customizable styling with Tailwind CSS
-- 🌙 Dark/Light theme support
 - 📱 Responsive design
 - 🔧 TypeScript support
 
