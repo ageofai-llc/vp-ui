@@ -42,7 +42,6 @@ function App() {
     <VoiceUI
       serverUrl="http://localhost:8099"
       systemPrompt="You are a helpful assistant."
-      authToken="your-auth-token"
       theme="dark"
       size="md"
     />
@@ -54,96 +53,78 @@ function App() {
 
 ### VoiceUI Component
 
-The main voice interface component with audio visualization and controls.
-
-\`\`\`tsx
-<VoiceUI
-  serverUrl="http://localhost:8099"
-  systemPrompt="You are a helpful assistant."
-  theme="dark"
-  size="lg"
-  className="custom-voice-ui"
-  onShare={() => console.log('Shared!')}
-/>
-\`\`\`
-
-#### Core Connection Props
 - **serverUrl** *(string)*  
   Pipecat server URL.  
   \`\`\`tsx
   <VoiceUI serverUrl="http://localhost:8099" />
   \`\`\`
+
 - **systemPrompt** *(string)*  
   System prompt for the AI agent.  
   \`\`\`tsx
   <VoiceUI systemPrompt="You are a helpful assistant." />
   \`\`\`
-- **authToken** *(string)*  
-  Authentication token for secure connections.  
-  \`\`\`tsx
-  <VoiceUI authToken="your-auth-token" />
-  \`\`\`
-- **agentId** *(string)*  
-  Specific agent ID to use.  
-  \`\`\`tsx
-  <VoiceUI agentId="agent-123" />
-  \`\`\`
 
-#### UI Customization Props
 - **theme** *('dark' | 'light')*  
   Color theme for the component.  
   \`\`\`tsx
   <VoiceUI theme="light" />
   \`\`\`
+
 - **size** *('sm' | 'md' | 'lg')*  
   Component size variant.  
   \`\`\`tsx
   <VoiceUI size="lg" />
   \`\`\`
+
 - **className** *(string)*  
   Additional CSS classes for root container.  
   \`\`\`tsx
   <VoiceUI className="border rounded-lg shadow-lg" />
   \`\`\`
+
 - **orbClassName** *(string)*  
   Additional CSS classes for the audio orb.  
   \`\`\`tsx
   <VoiceUI orbClassName="ring-4 ring-blue-500" />
   \`\`\`
+
 - **controlsClassName** *(string)*  
   Additional CSS classes for controls container.  
   \`\`\`tsx
   <VoiceUI controlsClassName="gap-6" />
   \`\`\`
+
 - **transcriptClassName** *(string)*  
   Additional CSS classes for transcript area.  
   \`\`\`tsx
   <VoiceUI transcriptClassName="font-mono text-green-400" />
   \`\`\`
 
-#### Feature Toggle Props
 - **showInfo** *(boolean)*  
   Show/hide info button.  
   \`\`\`tsx
   <VoiceUI showInfo={false} />
   \`\`\`
+
 - **showShare** *(boolean)*  
   Show/hide share button.  
   \`\`\`tsx
   <VoiceUI showShare={false} />
   \`\`\`
+
 - **showTranscript** *(boolean)*  
   Show/hide transcript button.  
   \`\`\`tsx
   <VoiceUI showTranscript={false} />
   \`\`\`
 
-#### Event Handler Props
 - **onShare** *(() => void)*  
   Custom share button handler.  
   \`\`\`tsx
   <VoiceUI onShare={() => navigator.clipboard.writeText('Check this out!')} />
   \`\`\`
+
 - **onInfoClick** *(() => void)*  
   Custom info button handler.  
   \`\`\`tsx
@@ -171,45 +152,39 @@ const {
 });
 \`\`\`
 
-#### Hook Options
 - **serverUrl** *(string)*  
   Pipecat server URL.  
   \`\`\`tsx
   useAgeOfAiConnect({ serverUrl: 'http://localhost:8099' })
   \`\`\`
+
 - **systemPrompt** *(string)*  
   System prompt for the AI.  
   \`\`\`tsx
   useAgeOfAiConnect({ systemPrompt: 'You are a helpful assistant.' })
   \`\`\`
+
 - **enableMic** *(boolean)*  
   Enable microphone input.  
   \`\`\`tsx
   useAgeOfAiConnect({ enableMic: true })
   \`\`\`
+
 - **enableCam** *(boolean)*  
   Enable camera input.  
   \`\`\`tsx
   useAgeOfAiConnect({ enableCam: false })
   \`\`\`
+
 - **debug** *(boolean)*  
   Enable debug logging.  
   \`\`\`tsx
   useAgeOfAiConnect({ debug: true })
   \`\`\`
 
-#### Hook Returns
-- **client**: Pipecat client instance
-- **isConnected**: Connection status boolean
-- **isConnecting**: Connection loading state
-- **transcript**: Live transcript array
-- **connect()**: Function to establish connection
-- **disconnect()**: Function to close connection
-- **sendMessage()**: Function to send messages
-
 ## Advanced Usage
 
-### Custom Styling with Tailwind
+### Custom Styling
 
 \`\`\`tsx
 <VoiceUI
@@ -223,7 +198,7 @@ const {
 />
 \`\`\`
 
-### Complete Custom Implementation
+### Custom Implementation
 
 \`\`\`tsx
 import { useAgeOfAiConnect } from '@ageofai/vp-ui';
@@ -235,13 +210,11 @@ function CustomVoiceInterface() {
     isConnecting,
     transcript,
     connect,
-    disconnect,
-    sendMessage
+    disconnect
   } = useAgeOfAiConnect({
     serverUrl: 'http://localhost:8099',
     systemPrompt: 'You are a helpful assistant.',
     enableMic: true,
-    enableCam: false,
     debug: true
   });
 
@@ -250,7 +223,6 @@ function CustomVoiceInterface() {
       <button 
         onClick={isConnected ? disconnect : connect}
         disabled={isConnecting}
-        className="connect-btn"
       >
         {isConnecting ? 'Connecting...' : isConnected ? 'Disconnect' : 'Connect'}
       </button>
@@ -264,34 +236,7 @@ function CustomVoiceInterface() {
           ))}
         </div>
       )}
-      
-      <button onClick={() => sendMessage('Hello!')}>
-        Send Test Message
-      </button>
     </div>
-  );
-}
-\`\`\`
-
-### Error Handling
-
-\`\`\`tsx
-import { VoiceUI } from '@ageofai/vp-ui';
-
-function App() {
-  const handleConnectionError = (error: Error) => {
-    console.error('Voice UI connection error:', error);
-    // Handle error (show toast, retry, etc.)
-  };
-
-  return (
-    <VoiceUI
-      serverUrl="http://localhost:8099"
-      systemPrompt="You are a helpful assistant."
-      onError={handleConnectionError}
-      // Fallback UI for connection issues
-      fallback={<div>Voice interface unavailable</div>}
-    />
   );
 }
 \`\`\`
@@ -326,15 +271,10 @@ export default function FullVoice() {
     alert('Link copied to clipboard!');
   };
 
-  const handleInfo = () => {
-    window.open('/docs', '_blank');
-  };
-
   return (
     <VoiceUI
       serverUrl="http://localhost:8099"
       systemPrompt="You are a knowledgeable AI assistant."
-      authToken={process.env.NEXT_PUBLIC_VP_API_KEY}
       theme="dark"
       size="lg"
       className="max-w-2xl mx-auto"
@@ -345,18 +285,15 @@ export default function FullVoice() {
       showShare={true}
       showTranscript={true}
       onShare={handleShare}
-      onInfoClick={handleInfo}
-      infoTitle="AI Voice Assistant"
-      infoDescription="Powered by advanced AI technology for natural conversations."
     />
   );
 }
 \`\`\`
 
-### Integration with Next.js
+### Next.js Integration
 
 \`\`\`tsx
-// pages/voice.tsx or app/voice/page.tsx
+// app/voice/page.tsx
 import { VoiceUI } from '@ageofai/vp-ui';
 
 export default function VoicePage() {
@@ -365,7 +302,6 @@ export default function VoicePage() {
       <VoiceUI
         serverUrl={process.env.NEXT_PUBLIC_PIPECAT_URL || 'http://localhost:8099'}
         systemPrompt="You are a helpful AI assistant."
-        authToken={process.env.NEXT_PUBLIC_VP_API_KEY}
         theme="dark"
         size="lg"
         className="w-full max-w-lg"
@@ -382,20 +318,12 @@ Full TypeScript definitions are included for all components and hooks.
 \`\`\`typescript
 import { VoiceUI, useAgeOfAiConnect, VoiceUIProps } from '@ageofai/vp-ui';
 
-// Type-safe props
 const voiceProps: VoiceUIProps = {
   serverUrl: 'http://localhost:8099',
   theme: 'dark',
   size: 'lg',
   onShare: () => void 0
 };
-
-// Type-safe hook usage
-const connection = useAgeOfAiConnect({
-  serverUrl: 'http://localhost:8099',
-  enableMic: true,
-  debug: false
-});
 \`\`\`
 
 ## Requirements
@@ -405,29 +333,9 @@ const connection = useAgeOfAiConnect({
 - **Tailwind CSS**: For styling (recommended)
 - **Pipecat Server**: Running instance for voice processing
 
-## Development
-
-\`\`\`bash
-# Clone the repository
-git clone https://github.com/ageofai/vp-ui.git
-cd vp-ui
-
-# Install dependencies
-npm install
-
-# Build the package
-npm run build
-
-# Watch for changes during development
-npm run dev
-
-# Run tests
-npm test
-\`\`\`
-
 ## Contributing
 
-We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
+We welcome contributions! Please see our Contributing Guide for details.
 
 1. Fork the repository
 2. Create your feature branch (`git checkout -b feature/amazing-feature`)
@@ -437,15 +345,10 @@ We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) f
 
 ## Support
 
-- 📖 [Documentation](https://docs.ageofai.com/vp-ui)
 - 🐛 [Issue Tracker](https://github.com/ageofai/vp-ui/issues)
 - 💬 [Discussions](https://github.com/ageofai/vp-ui/discussions)
-- 📧 [Email Support](mailto:support@ageofai.com)
+- 📧 Email Support: support@ageofai.com
 
 ## License
 
 MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Changelog
-
-See [CHANGELOG.md](CHANGELOG.md) for release notes and version history.
