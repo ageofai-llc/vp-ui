@@ -11,11 +11,10 @@
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "incremental": true,
     "jsx": "react-jsx",
     "declaration": true,
     "declarationMap": true
   },
-  "include": ["src/**/*"],
+  "include": ["src", "src/tsup.config.ts"],
   "exclude": ["node_modules", "dist"]
 }

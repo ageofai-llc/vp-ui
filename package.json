@@ -1,5 +1,5 @@
 {
-  "name": "@ageofai/vp-ui",
+  "name": "@agoai/vp-ui",
   "version": "0.0.1",
   "description": "A reusable voice UI component",
   "type": "module",
@@ -8,13 +8,13 @@
   "types": "dist/index.d.ts",
   "files": ["dist"],
   "scripts": {
-    "build": "tsup",
-    "dev": "tsup --watch",
+    "build": "tsup --config tsup.config.ts",
+    "dev": "tsup --watch --config tsup.config.ts",
     "prepublishOnly": "npm run build"
   },
   "peerDependencies": {
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react": "^19.0.0",
+    "react-dom": "^19.1.1"
   },
   "dependencies": {
     "@pipecat-ai/client-js": "^1.2.0",
