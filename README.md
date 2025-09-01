@@ -21,7 +21,7 @@ It features **real-time audio visualization**, **live transcription**, and **sea
 ## 📦 Installation
 
 ```bash
-npm install @ageofai/vp-ui
+npm install @agoai/vp-ui
 ```
 
 ---
@@ -130,7 +130,7 @@ function App() {
 ### Minimal Setup
 
 ```tsx
-import { VoiceUI } from '@ageofai/vp-ui';
+import { VoiceUI } from '@agoai/vp-ui';
 
 export default function MinimalVoice() {
   return (
@@ -148,7 +148,7 @@ export default function MinimalVoice() {
 ### Full-Featured Implementation
 
 ```tsx
-import { VoiceUI } from '@ageofai/vp-ui';
+import { VoiceUI } from '@@agoai/vp-ui';
 
 export default function FullVoice() {
   const handleShare = () => {
@@ -190,7 +190,7 @@ export default function FullVoice() {
 For custom implementations, use the `useAgeOfAiConnect` hook:
 
 ```tsx
-import { useAgeOfAiConnect } from '@ageofai/vp-ui';
+import { useAgeOfAiConnect } from '@agoai/vp-ui';
 
 function CustomVoiceInterface() {
   const {
@@ -378,7 +378,7 @@ import {
   useAgeOfAiConnect, 
   VoiceUIProps, 
   TranscriptMessage 
-} from '@ageofai/vp-ui';
+} from '@agoai/vp-ui';
 
 const voiceProps: VoiceUIProps = {
   serverUrl: 'http://localhost:8099',
